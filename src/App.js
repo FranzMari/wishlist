@@ -1,16 +1,18 @@
-import React from 'react';
-import './App.css';
-import Topbar from './components/Topbar'
+import React from "react";
+import "./App.css";
+import MenuAppBar from "./components/MenuAppBar";
+import AppDrawer from "./components/AppDrawer";
 
 function App() {
-  
   const [pageInfo] = React.useState({
-      pageTitle: "Lists"
-  })
+    pageTitle: "Lists",
+    isDrawerOpen: false,
+  });
 
   return (
     <div className="App">
-        <Topbar title={pageInfo.pageTitle}/>      
+      <MenuAppBar title={pageInfo.pageTitle} />
+      <AppDrawer open={pageInfo.isDrawerOpen} />
     </div>
   );
 }

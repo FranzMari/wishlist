@@ -16,9 +16,11 @@
     justify-content: space-around;
 }
 
-#menu-button hr {
-    width: 3rem;
-    color: white;
+.line {
+    width: 90%;
+    height: .25rem;
+    background-color: white;
+    margin: auto;
 }
 
 .topbar h1 {

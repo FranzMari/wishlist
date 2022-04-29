@@ -7,9 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
 export default function MenuAppBar(props) {
-  const toggleDrawer = function () {
-    console.log("Drawer toggled!");
-  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -21,7 +18,7 @@ export default function MenuAppBar(props) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={toggleDrawer}
+            onClick={props.handleClick}
           >
             <MenuIcon />
           </IconButton>

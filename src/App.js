@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import MenuAppBar from "./components/MenuAppBar";
 import AppDrawer from "./components/AppDrawer";
+import Lists from "./components/Lists"
 
 function App() {
   const [pageInfo, setPageInfo] = React.useState({
@@ -22,7 +23,10 @@ function App() {
     <div className="App">
       <MenuAppBar title={pageInfo.pageTitle} handleClick={setDrawerOpen}/>
       <AppDrawer 
-        open={pageInfo.isDrawerOpen} />
+        isOpen={pageInfo.isDrawerOpen}
+        handleOnClose={setDrawerOpen}
+        handleOnOpen={setDrawerOpen} />
+      <Lists />
     </div>
   );
 }

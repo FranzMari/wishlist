@@ -4,9 +4,9 @@ import { SwipeableDrawer } from "@mui/material";
 export default function AppDrawer(props) {
   return (
     <SwipeableDrawer 
-        open={props.open}
-        onOpen={()=> {console.log("open")}}
-        onClose={()=> {console.log("close")}}>
+        open={props.isOpen}
+        onOpen={props.handleOnOpen}
+        onClose={props.handleOnClose}>
       <div>Menu item!</div>
     </SwipeableDrawer>
   );

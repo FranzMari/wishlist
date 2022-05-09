@@ -1,12 +1,11 @@
 import * as React from "react";
+import lists from '../lists.json'
+
 
 export default function Lists() {
   return (
     <ol>
-      <li>List 1</li>
-      <li>List 2</li>
-      <li>List 3</li>
-      <li>List 4</li>
+        { lists.Lists.map(list => <li key={lists.Lists.indexOf(list)}> {list.name} </li>)}
     </ol>
   );
 }

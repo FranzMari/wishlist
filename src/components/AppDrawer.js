@@ -19,14 +19,14 @@ export default function AppDrawer(props) {
       <List>
         <ListItem button key="Settings">
           <ListItemText primary="Settings" />
-          <ListItemIcon>
-            <SettingsIcon x={{ justifyContent: "end" }} />
+          <ListItemIcon sx={{ justifyContent: "end" }}>
+            <SettingsIcon />
           </ListItemIcon>
         </ListItem>
         <ListItem button key="About">
           <ListItemText primary="About" />
-          <ListItemIcon>
-            <InfoIcon sx={{ justifyContent: "end" }} />
+          <ListItemIcon sx={{ justifyContent: "end" }}>
+            <InfoIcon  />
           </ListItemIcon>
         </ListItem>
       </List>

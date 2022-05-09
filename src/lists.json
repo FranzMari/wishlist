@@ -1,6 +1,28 @@
 {
-    "Lists": {
-        "name": "List 1",
-        "content": [{}]
+    "Lists": [
+        {
+            "name": "List 1",
+            "content": [
+                {}
+            ]
+        },
+        {
+            "name": "List 2",
+            "content": [
+                {}
+            ]
+        },
+        {
+            "name": "List 3",
+            "content": [
+                {}
+            ]
+        },
+        {
+            "name": "List 4",
+            "content": [
+                {}
+            ]
         }
+    ]
 }

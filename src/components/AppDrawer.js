@@ -16,7 +16,7 @@ export default function AppDrawer(props) {
       onOpen={props.handleOnOpen}
       onClose={props.handleOnClose}
     >
-      <List>
+      <List >
         <ListItem button key="Settings">
           <ListItemText primary="Settings" />
           <ListItemIcon sx={{ justifyContent: "end" }}>

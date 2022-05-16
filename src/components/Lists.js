@@ -11,15 +11,18 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import NewListForm from "./NewListForm"
 
 export default function Lists() {
   const [wishlists, setWishlists] = React.useState([]);
 
-  const newWishlist = () => {
-    setWishlists((prevState) => {
+  const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
+
+  const showNewListModal = () => {
+    setNewListModalVisible((prevState) => {
       return {
         ...prevState,
-        isDrawerOpen: !prevState.isDrawerOpen,
+        isNewListModalVisible: true,
       };
     });
   };
@@ -31,6 +34,7 @@ export default function Lists() {
   };
   return (
     <Box>
+    { wishlists.length !== 0 ?
       <List>
         {wishlists.map((list) => (
           <ListItem
@@ -50,12 +54,15 @@ export default function Lists() {
             <ListItemText primary={list.name} />
           </ListItem>
         ))}
-      </List>
+      </List> :
+      <Box sx={{width: "80%", margin: "auto", padding: "1em", textAlign: "center"}}>No lists available. Use the action button to create one</Box>
+      }
+      {isNewListModalVisible && <NewListForm />}
       <Fab
         sx={fabStyle}
         color="primary"
         aria-label="add"
-        handleClick={newWishlist}
+        onClick={showNewListModal}
       >
         <AddIcon />
       </Fab>

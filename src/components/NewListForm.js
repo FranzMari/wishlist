@@ -27,7 +27,7 @@ export default function NewListForm(props) {
       </DialogContent>
       <DialogActions>
         <Button onClick={props.handleClose}>Cancel</Button>
-        <Button onClick={props.handleClose}>Save</Button>
+        <Button onClick={props.handleSave}>Save</Button>
       </DialogActions>
     </Dialog>
   );

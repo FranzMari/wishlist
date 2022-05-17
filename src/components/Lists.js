@@ -16,6 +16,17 @@ import NewListForm from "./NewListForm";
 export default function Lists() {
   const [wishlists, setWishlists] = React.useState([]);
 
+  const addWishlist = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+    setWishlists((prevState, e) => {
+      return {
+        ...prevState,
+        isDrawerOpen: !prevState.isDrawerOpen,
+      };
+    });
+  };
+
   const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
 
   const showNewListModal = () => {
@@ -70,6 +81,7 @@ export default function Lists() {
       <NewListForm
         open={isNewListModalVisible}
         handleClose={hideNewListModal}
+        handleSave={addWishlist}
       />
       <Fab
         sx={fabStyle}

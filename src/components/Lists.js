@@ -16,9 +16,13 @@ import NewListForm from "./NewListForm";
 export default function Lists() {
   const [wishlists, setWishlists] = React.useState([]);
 
-  const addWishlist = (event) => {
-    event.preventDefault();
-    setWishlists([{"name": "List 1","content": [{}]}]);
+  const addWishlist = () => {
+    const newList = {
+      name: formData.listName,
+      content: [{}],
+    };
+    console.log(newList);
+    //setWishlists((prevState) => prevState.push(newList));
   };
 
   const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
@@ -31,6 +35,19 @@ export default function Lists() {
     setNewListModalVisible(false);
   };
 
+  const [formData, setFormData] = React.useState({
+    listName: "",
+  });
+
+  function changeValue(event) {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  }
   const fabStyle = {
     position: "absolute",
     bottom: 16,
@@ -54,7 +71,8 @@ export default function Lists() {
                     <DeleteIcon />
                   </IconButton>
                 </Stack>
-              }>
+              }
+            >
               <ListItemText primary={list.name} />
             </ListItem>
           ))}
@@ -74,7 +92,9 @@ export default function Lists() {
       <NewListForm
         open={isNewListModalVisible}
         handleClose={hideNewListModal}
+        handleChange={changeValue}
         handleSave={addWishlist}
+        formData={formData}
       />
       <Fab
         sx={fabStyle}

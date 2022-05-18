@@ -16,15 +16,9 @@ import NewListForm from "./NewListForm";
 export default function Lists() {
   const [wishlists, setWishlists] = React.useState([]);
 
-  const addWishlist = (e) => {
-    e.preventDefault();
-    console.log(e.target);
-    setWishlists((prevState, e) => {
-      return {
-        ...prevState,
-        isDrawerOpen: !prevState.isDrawerOpen,
-      };
-    });
+  const addWishlist = (event) => {
+    event.preventDefault();
+    setWishlists([{"name": "List 1","content": [{}]}]);
   };
 
   const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
@@ -60,8 +54,7 @@ export default function Lists() {
                     <DeleteIcon />
                   </IconButton>
                 </Stack>
-              }
-            >
+              }>
               <ListItemText primary={list.name} />
             </ListItem>
           ))}

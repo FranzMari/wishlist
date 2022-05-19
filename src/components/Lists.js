@@ -16,13 +16,14 @@ import NewListForm from "./NewListForm";
 export default function Lists() {
   const [wishlists, setWishlists] = React.useState([]);
 
-  const addWishlist = () => {
+  const addWishlist = (event) => {
+    event.preventDefault();
     const newList = {
       name: formData.listName,
       content: [{}],
     };
-    console.log(newList);
-    //setWishlists((prevState) => prevState.push(newList));
+    setWishlists((prevState) => [...prevState, newList]);
+    hideNewListModal();
   };
 
   const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
@@ -33,6 +34,11 @@ export default function Lists() {
 
   const hideNewListModal = () => {
     setNewListModalVisible(false);
+    setFormData(() => {
+      return {
+        listName: "",
+      };
+    });
   };
 
   const [formData, setFormData] = React.useState({

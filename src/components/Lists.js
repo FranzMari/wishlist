@@ -15,15 +15,23 @@ import NewListForm from "./NewListForm";
 
 export default function Lists() {
   const [wishlists, setWishlists] = React.useState([]);
-
-  const addWishlist = (event) => {
+  
+  const addNewWishlist = (event) => {
     event.preventDefault();
+    addWishlist();
+    hideNewListModal();    
+  };
+
+  const addWishlist = () => {
     const newList = {
       name: formData.listName,
       content: [{}],
     };
     setWishlists((prevState) => [...prevState, newList]);
-    hideNewListModal();
+  };
+
+  const deleteWishlist = (listId) => {
+    console.log(listId);
   };
 
   const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
@@ -73,7 +81,7 @@ export default function Lists() {
                   <IconButton edge="end" aria-label="edit">
                     <EditIcon />
                   </IconButton>
-                  <IconButton edge="end" aria-label="delete">
+                  <IconButton edge="end" aria-label="delete" onClick={deleteWishlist}>
                     <DeleteIcon />
                   </IconButton>
                 </Stack>
@@ -99,7 +107,7 @@ export default function Lists() {
         open={isNewListModalVisible}
         handleClose={hideNewListModal}
         handleChange={changeValue}
-        handleSave={addWishlist}
+        handleSave={addNewWishlist}
         formData={formData}
       />
       <Fab

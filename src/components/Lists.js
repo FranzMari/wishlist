@@ -30,9 +30,16 @@ export default function Lists() {
     setWishlists((prevState) => [...prevState, newList]);
   };
 
-  const deleteWishlist = (listId) => {
-    console.log(listId);
-  };
+  const deleteWishlist = (event) => {
+    const listId = parseInt(event.target.attributes.listid.value);
+    const newState = [];
+    for (let i = 0; i < wishlists.length; i++) {
+        if (wishlists.indexOf(wishlists[i]) !== listId) {
+            newState.push(wishlists[i])
+        }
+    }
+    setWishlists(newState)
+}
 
   const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
 
@@ -81,7 +88,7 @@ export default function Lists() {
                   <IconButton edge="end" aria-label="edit">
                     <EditIcon />
                   </IconButton>
-                  <IconButton edge="end" aria-label="delete" onClick={deleteWishlist}>
+                  <IconButton edge="end" aria-label="delete" onClick={deleteWishlist} listid={wishlists.indexOf(list)}>
                     <DeleteIcon />
                   </IconButton>
                 </Stack>

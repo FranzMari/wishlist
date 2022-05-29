@@ -10,12 +10,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 export default function NewListForm(props) {
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
-      <form onSubmit={props.handleSave}>
-        <DialogTitle>New Wishlist</DialogTitle>
+      <form onSubmit={props.formData.onSubmitAction}>
+        <DialogTitle>{props.formData.boxTitle}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Enter a name for the new wishlist.
-          </DialogContentText>
+          <DialogContentText>{props.formData.boxMessage}</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -31,7 +29,7 @@ export default function NewListForm(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={props.handleClose}>Cancel</Button>
-          <Button type="submit">Save</Button>
+          <Button type="submit">{props.formData.confirmButtonLabel}</Button>
         </DialogActions>
       </form>
     </Dialog>

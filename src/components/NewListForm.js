@@ -10,7 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 export default function NewListForm(props) {
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
-      <form onSubmit={props.formData.onSubmitAction}>
+      <form onSubmit={props.handleSave}>
         <DialogTitle>{props.formData.boxTitle}</DialogTitle>
         <DialogContent>
           <DialogContentText>{props.formData.boxMessage}</DialogContentText>
@@ -25,6 +25,7 @@ export default function NewListForm(props) {
             name="listName"
             value={props.formData.listName}
             onChange={props.handleChange}
+            helperText={props.formData.helperText}
           />
         </DialogContent>
         <DialogActions>

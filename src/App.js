@@ -8,6 +8,7 @@ function App() {
   const [pageInfo, setPageInfo] = React.useState({
     pageTitle: "Lists",
     isDrawerOpen: false,
+    action: "",
   });
 
   const setDrawerOpen = () => {

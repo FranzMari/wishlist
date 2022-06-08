@@ -14,35 +14,53 @@ import AddIcon from "@mui/icons-material/Add";
 import NewListForm from "./NewListForm";
 
 export default function Lists() {
-  const [wishlists, setWishlists] = React.useState([]);
+  const [wishlists, setWishlists] = React.useState(
+    JSON.parse(localStorage.getItem("wishlists")) || []
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem("wishlists", JSON.stringify(wishlists));
+  }, [wishlists]);
 
   const [formData, setFormData] = React.useState({
     boxTitle: "",
     boxMessage: "",
     listName: "",
+    previousListName: "",
+    listNameError: false,
     confirmButtonLabel: "",
-    onSubmitAction: "",
   });
+
+  const [pageInfo, setPageInfo] = React.useState({
+    action: "",
+  });
+
+  const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
 
   const addNewWishlist = (event) => {
     event.preventDefault();
-    addWishlist();
-    hideNewListModal();
-  };
-
-  const addWishlist = () => {
     const newList = {
       name: formData.listName,
       content: [{}],
     };
-    console.log(newList);
     setWishlists((prevState) => [...prevState, newList]);
+    hideNewListModal();
   };
 
-  const changeListName = (event, listId) => {
+  const changeListName = (event) => {
     event.preventDefault();
-    console.log(listId, formData.listName);
-    //setWishlists((prevState) => [...prevState, wishlist[listId].name: formData.listName]);
+    const list = wishlists.filter(
+      (list) => list.name === formData.previousListName
+    );
+    const listId = wishlists.indexOf(list[0]);
+    setWishlists((prevState) =>
+      prevState.map((oldList) => {
+        return prevState.indexOf(oldList) === listId
+          ? { ...oldList, name: formData.listName }
+          : oldList;
+      })
+    );
+    hideNewListModal();
   };
 
   const deleteWishlist = (event, listId) => {
@@ -54,27 +72,41 @@ export default function Lists() {
 
   const editWishlist = (event, listId) => {
     event.stopPropagation();
+    setPageInfo((prevState) => {
+      return {
+        ...prevState,
+        action: "edit",
+      };
+    });
     setFormData(() => {
       return {
         boxTitle: "Edit wishlist name",
         boxMessage: "Change the wishlist's name.",
         listName: wishlists[listId].name,
+        previousListName: wishlists[listId].name,
+        listNameError: false,
+        helperText: "",
         confirmButtonLabel: "Save",
-        onSubmitAction: changeListName,
       };
     });
     setNewListModalVisible(true);
   };
 
-  const [isNewListModalVisible, setNewListModalVisible] = React.useState(false);
-
   const showNewListModal = () => {
+    setPageInfo((prevState) => {
+      return {
+        ...prevState,
+        action: "add",
+      };
+    });
     setFormData(() => {
       return {
         boxTitle: "New Wishlist",
         boxMessage: "Enter a name for the new wishlist.",
         listName: "",
+        listNameError: false,
         confirmButtonLabel: "Save",
+        helperText: "Ciao!",
         onSubmitAction: addNewWishlist,
       };
     });
@@ -88,6 +120,9 @@ export default function Lists() {
         boxTitle: "",
         boxMessage: "",
         listName: "",
+        previousListName: "",
+        listNameError: false,
+        helperText: "",
         confirmButtonLabel: "",
       };
     });
@@ -101,8 +136,8 @@ export default function Lists() {
         [name]: value,
       };
     });
-    console.log(formData);
   }
+
   const fabStyle = {
     position: "absolute",
     bottom: 16,
@@ -160,7 +195,7 @@ export default function Lists() {
         open={isNewListModalVisible}
         handleClose={hideNewListModal}
         handleChange={changeValue}
-        //handleSave={formData.onSubmitAction}
+        handleSave={pageInfo.action === "add" ? addNewWishlist : changeListName}
         formData={formData}
       />
       <Fab
